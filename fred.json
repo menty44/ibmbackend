@@ -1,0 +1,46 @@
+{
+  "images_processed": 1,
+  "images": [
+    {
+      "faces": [
+        {
+          "age": {
+            "min": 23,
+            "max": 26,
+            "score": 0.7812431
+          },
+          "gender": {
+            "gender": "FEMALE",
+            "gender_label": "female",
+            "score": 0.96488166
+          },
+          "face_location": {
+            "width": 281.0,
+            "height": 319.0,
+            "left": 169.0,
+            "top": 69.0
+          }
+        },
+        {
+          "age": {
+            "min": 28,
+            "max": 33,
+            "score": 0.49534407
+          },
+          "gender": {
+            "gender": "MALE",
+            "gender_label": "male",
+            "score": 0.8238174
+          },
+          "face_location": {
+            "width": 42.0,
+            "height": 73.0,
+            "left": 479.0,
+            "top": 394.0
+          }
+        }
+      ],
+      "image": "face.jpg"
+    }
+  ]
+}

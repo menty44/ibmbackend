@@ -2,6 +2,15 @@ package com.example.filedemo.controller;
 
 import com.example.filedemo.payload.UploadFileResponse;
 import com.example.filedemo.service.FileStorageService;
+import com.ibm.watson.developer_cloud.service.security.IamOptions;
+import com.ibm.watson.developer_cloud.visual_recognition.v3.VisualRecognition;
+import com.ibm.watson.developer_cloud.visual_recognition.v3.model.DetectFacesOptions;
+import com.ibm.watson.developer_cloud.visual_recognition.v3.model.DetectedFaces;
+import com.sun.xml.internal.messaging.saaj.packaging.mime.MessagingException;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +23,16 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
+
+//import jdk.nashorn.internal.parser.JSONParser;
 
 @RestController
 public class FileController {
@@ -72,4 +87,88 @@ public class FileController {
                 .body(resource);
     }
 
-}
+    @CrossOrigin
+    @RequestMapping(value = "recog", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<Map<String,String>> newFile(
+            @RequestParam(value = "incomingFileName") String incomingFileName) throws IOException, MessagingException, ParseException {
+
+        Map<String, String> response = new HashMap<String, String>();
+
+        System.out.print("### ######################### ###\n");
+        System.out.print("# ** hello  testing ibm AI   ** #\n");
+        System.out.print("### ######################### ###\n");
+
+
+        IamOptions options = new IamOptions.Builder()
+                .apiKey("g2lVDPrOue8CrQUn02sFr9XLrXqvVKzuIXcJN5DxGP9o")
+                .build();
+
+        VisualRecognition service = new VisualRecognition("2018-03-19", options);
+
+        DetectFacesOptions detectFacesOptions = new DetectFacesOptions.Builder()
+                .imagesFile(new File(incomingFileName))
+                .build();
+        DetectedFaces result = service.detectFaces(detectFacesOptions).execute();
+        System.out.println(result);
+
+        String st = result.toString();
+
+        JSONParser parser = new JSONParser();
+        JSONObject json = (JSONObject) parser.parse(st);
+
+        Long ip = (Long) json.get("images_processed");
+        System.out.println(ip);
+
+        // loop array
+        JSONArray msg = (JSONArray) json.get("images");
+
+        System.out.println("Array size :: "+msg.size());
+
+        if(msg.size() == 1){
+            // iterate via "New way to loop"
+            System.out.println("\n==> Advance For Loop Example..");
+            for (Object temp : msg) {
+//            System.out.println(temp);
+                JSONParser parsertwo = new JSONParser();
+                JSONObject jsontwo = (JSONObject) parsertwo.parse(temp.toString());
+
+                JSONArray tmp = (JSONArray) jsontwo.get("faces");
+
+                for (Object levelTwo : tmp){
+                    System.out.println("l2 "+ levelTwo);
+
+                    JSONObject jsonthree = (JSONObject) parsertwo.parse(levelTwo.toString());
+                    Object test = jsonthree;
+                    String gender = (String) test.get("gender");
+                    System.out.println("l3 "+ gender);
+
+//                    JSONObject jsonthree = (JSONObject) parsertwo.parse(gender);
+//                    String genderTitle = (String) jsonthree.get("gender");
+//                    System.out.println(genderTitle);
+                    String sm = levelTwo.toString();
+                    response.put("gender", sm);
+
+                }
+//            response.put("res", (String) temp);
+            }
+        }else {
+            //write to file
+            try (FileWriter file = new FileWriter("fred.json")) {
+                file.write(result.toString());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            System.out.print("###############################\n");
+            System.out.print("###        end the AI       ###\n");
+            System.out.print("###############################\n");
+
+            response.put("code", "0");
+            response.put("image", incomingFileName);
+            response.put("mg", "success");
+
+        }
+        return ResponseEntity.ok().body(response);
+    }
+
+    }
