@@ -5,6 +5,7 @@ public class UploadFileResponse {
     private String fileName;
     private String fileDownloadUri;
     private String fileType;
+//    private String facial;
     private long size;
 
     public UploadFileResponse(String fileName, String fileDownloadUri, String fileType, long size) {
@@ -12,6 +13,7 @@ public class UploadFileResponse {
         this.fileDownloadUri = fileDownloadUri;
         this.fileType = fileType;
         this.size = size;
+//        this.facial = facial;
     }
 
     public String getFileName() {

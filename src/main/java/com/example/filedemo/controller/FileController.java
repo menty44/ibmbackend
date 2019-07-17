@@ -126,7 +126,7 @@ public class FileController {
 
         if(msg.size() == 1){
             // iterate via "New way to loop"
-            System.out.println("\n==> Advance For Loop Example..");
+            System.out.println("\n==> Advance For Loop ..");
             for (Object temp : msg) {
 //            System.out.println(temp);
                 JSONParser parsertwo = new JSONParser();
@@ -137,16 +137,27 @@ public class FileController {
                 for (Object levelTwo : tmp){
                     System.out.println("l2 "+ levelTwo);
 
-                    JSONObject jsonthree = (JSONObject) parsertwo.parse(levelTwo.toString());
-                    Object test = jsonthree;
-                    String gender = (String) test.get("gender");
-                    System.out.println("l3 "+ gender);
+                    String ageObj = ((JSONObject)levelTwo).get("age").toString();
+                    JSONObject obj;
+                    obj = (JSONObject) parser.parse(ageObj);
+                    String min_age = ((JSONObject)obj).get("min").toString();
+                    String max_age = ((JSONObject)obj).get("min").toString();
 
-//                    JSONObject jsonthree = (JSONObject) parsertwo.parse(gender);
-//                    String genderTitle = (String) jsonthree.get("gender");
-//                    System.out.println(genderTitle);
-                    String sm = levelTwo.toString();
-                    response.put("gender", sm);
+
+                    String genderObj = ((JSONObject)levelTwo).get("gender").toString();
+                    JSONObject ob;
+                    ob = (JSONObject) parser.parse(genderObj);
+                    String gender_label = ((JSONObject)ob).get("gender_label").toString();
+                    String score = ((JSONObject)ob).get("score").toString();
+
+
+                    response.put("code", "0");
+                    response.put("msg", "success");
+                    response.put("image", incomingFileName);
+                    response.put("min-age", min_age);
+                    response.put("max_age", max_age);
+                    response.put("gender_label", gender_label);
+                    response.put("score", score);
 
                 }
 //            response.put("res", (String) temp);
