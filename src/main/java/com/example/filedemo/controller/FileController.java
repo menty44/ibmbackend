@@ -6,7 +6,7 @@ import com.ibm.watson.developer_cloud.service.security.IamOptions;
 import com.ibm.watson.developer_cloud.visual_recognition.v3.VisualRecognition;
 import com.ibm.watson.developer_cloud.visual_recognition.v3.model.DetectFacesOptions;
 import com.ibm.watson.developer_cloud.visual_recognition.v3.model.DetectedFaces;
-import com.sun.xml.internal.messaging.saaj.packaging.mime.MessagingException;
+//import com.sun.xml.internal.messaging.saaj.packaging.mime.MessagingException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -90,7 +90,7 @@ public class FileController {
     @CrossOrigin
     @RequestMapping(value = "recog", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<Map<String,String>> newFile(
-            @RequestParam(value = "incomingFileName") String incomingFileName) throws IOException, MessagingException, ParseException {
+            @RequestParam(value = "incomingFileName") String incomingFileName) throws IOException, ParseException {
 
         Map<String, String> response = new HashMap<String, String>();
 
