@@ -1,4 +1,4 @@
-package com.example.filedemo;
+package com.blaqueyard.afro;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

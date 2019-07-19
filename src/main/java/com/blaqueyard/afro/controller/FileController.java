@@ -1,7 +1,7 @@
-package com.example.filedemo.controller;
+package com.blaqueyard.afro.controller;
 
-import com.example.filedemo.payload.UploadFileResponse;
-import com.example.filedemo.service.FileStorageService;
+import com.blaqueyard.afro.payload.UploadFileResponse;
+import com.blaqueyard.afro.service.FileStorageService;
 import com.ibm.watson.developer_cloud.service.security.IamOptions;
 import com.ibm.watson.developer_cloud.visual_recognition.v3.VisualRecognition;
 import com.ibm.watson.developer_cloud.visual_recognition.v3.model.DetectFacesOptions;
@@ -98,9 +98,8 @@ public class FileController {
         System.out.print("# ** hello  testing ibm AI   ** #\n");
         System.out.print("### ######################### ###\n");
 
-
         IamOptions options = new IamOptions.Builder()
-                .apiKey("g2lVDPrOue8CrQUn02sFr9XLrXqvVKzuIXcJN5DxGP9o")
+                .apiKey("remove")
                 .build();
 
         VisualRecognition service = new VisualRecognition("2018-03-19", options);

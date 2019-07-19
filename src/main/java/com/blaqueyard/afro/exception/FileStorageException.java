@@ -1,4 +1,4 @@
-package com.example.filedemo.exception;
+package com.blaqueyard.afro.exception;
 
 public class FileStorageException extends RuntimeException {
     public FileStorageException(String message) {

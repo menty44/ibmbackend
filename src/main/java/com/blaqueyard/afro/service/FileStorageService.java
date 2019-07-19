@@ -1,8 +1,8 @@
-package com.example.filedemo.service;
+package com.blaqueyard.afro.service;
 
-import com.example.filedemo.exception.FileStorageException;
-import com.example.filedemo.exception.MyFileNotFoundException;
-import com.example.filedemo.property.FileStorageProperties;
+import com.blaqueyard.afro.exception.FileStorageException;
+import com.blaqueyard.afro.exception.MyFileNotFoundException;
+import com.blaqueyard.afro.property.FileStorageProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;

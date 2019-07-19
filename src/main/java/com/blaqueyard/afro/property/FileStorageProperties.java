@@ -1,4 +1,4 @@
-package com.example.filedemo.property;
+package com.blaqueyard.afro.property;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

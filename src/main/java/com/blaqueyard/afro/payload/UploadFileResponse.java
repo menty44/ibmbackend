@@ -1,4 +1,4 @@
-package com.example.filedemo.payload;
+package com.blaqueyard.afro.payload;
 
 
 public class UploadFileResponse {
