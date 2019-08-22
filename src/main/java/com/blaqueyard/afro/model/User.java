@@ -1,23 +1,12 @@
 package com.blaqueyard.afro.model;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-import org.hibernate.validator.constraints.NotBlank;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.Date;
-import java.util.UUID;
-
-
 import java.util.UUID;
 
 @Entity
@@ -49,18 +38,35 @@ public class User {
     @Size(max = 20)
     private String activated;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "role_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
-    private Role role;
+//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+//    @JoinColumn(name = "role_id", nullable = false)
+//    @OnDelete(action = OnDeleteAction.CASCADE)
+//    @JsonIgnore
+//    private Role role;
+
+//    @ManyToOne
+//    @JoinColumn
+//    private Role role;
+
+    @NotNull
+    @Size(max = 20)
+    private String role;
 
 
-    public Role getRole() {
+//    public Role getRole() {
+//        return role;
+//    }
+//
+//    public void setRole(Role role) {
+//        this.role = role;
+//    }
+
+
+    public String getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
+    public void setRole(String role) {
         this.role = role;
     }
 
@@ -113,12 +119,18 @@ public class User {
     }
 
 
-    public User(UUID encry, @NotNull @Size(max = 50) String email, @NotNull @Size(max = 50) String username, @NotNull @Size(max = 50) String password, @NotNull @Size(max = 20) String activated, Role role) {
-        this.encry = encry;
-        this.email = email;
-        this.username = username;
-        this.password = password;
-        this.activated = activated;
-        this.role = role;
+//    public User(UUID encry, @NotNull @Size(max = 50) String email, @NotNull @Size(max = 50) String username, @NotNull @Size(max = 50) String password, @NotNull @Size(max = 20) String activated
+////            , Role role
+//    ) {
+//        this.encry = encry;
+//        this.email = email;
+//        this.username = username;
+//        this.password = password;
+//        this.activated = activated;
+//        this.role = role;
+//    }
+
+    public User(){
+
     }
 }
